@@ -223,4 +223,122 @@ function shuffleArray(array) {
     return array;
 }
 
-const liItem = document.querySelectorAll('.li-item')
+const items = document.querySelectorAll('.li-item'); // Ambil semua elemen <li>
+
+items.forEach(item => {
+    item.addEventListener('click', function() {
+        // Hapus class 'active' dari semua item
+        items.forEach(i => i.classList.remove('active'));
+
+        // Tambahkan class 'active' ke item yang diklik
+        this.classList.add('active');
+    });
+});
+
+// Select all navigation items and containers
+const navigationItems = {
+    about: {
+        navElement: document.querySelector('.about'),
+        container: document.querySelector('.about-container')
+    },
+    education: {
+        navElement: document.querySelector('.education'),
+        container: document.querySelector('.status-container')
+    },
+    skill: {
+        navElement: document.querySelector('.skill'),
+        container: document.querySelector('.skills-container')
+    },
+    tools: {
+        navElement: document.querySelector('.tools'),
+        container: document.querySelector('.skills-container')
+    }
+};
+
+const web = document.querySelector('.web');
+const mob = document.querySelector('.mob');
+const video = document.querySelector('.video');
+const render = document.querySelector('.render');
+
+const imgAbout = document.getElementById('img-about');
+const img = document.getElementById('img-about');
+
+const src1 = 'assets/LITBANG_2_Brillian Maulana Syah.png';
+const src2 = 'assets/erasebg-transformed (1).png';
+
+// Function to hide all containers
+function hideAllContainers() {
+    Object.values(navigationItems).forEach(item => {
+        item.container.classList.remove('visible');
+        item.container.classList.add('hidden');
+    });
+}
+
+// Function to reset skill animations
+function resetSkillAnimations() {
+    web.style.animation = '';
+    mob.style.animation = '';
+    video.style.animation = '';
+    render.style.animation = '';
+}
+
+// Function to handle section toggle
+function handleSectionToggle(section) {
+    // Reset any previous skill animations
+    resetSkillAnimations();
+
+    // Hide all containers first
+    hideAllContainers();
+
+    // Show the selected container
+    section.container.classList.remove('hidden');
+    section.container.classList.add('visible');
+
+    // Handle image changes
+    if (section === navigationItems.about || section === navigationItems.education) {
+        imgAbout.src = src1;
+        img.classList.remove('img-transform');
+        img.classList.add('img-default');
+    } else if (section === navigationItems.skill) {
+        // Specific handling for skill section
+        imgAbout.src = src2;
+        img.classList.remove('img-default');
+        img.classList.add('img-transform');
+
+        // Trigger skill animations
+        web.style.animation = 'progressingWeb 1s ease forwards';
+        mob.style.animation = 'progressingMob 1s ease forwards';
+        video.style.animation = 'progressingVid 1s ease forwards';
+        render.style.animation = 'progressing3D 1s ease forwards';
+    } else {
+        imgAbout.src = src2;
+        img.classList.remove('img-default');
+        img.classList.add('img-transform');
+    }
+}
+
+// Add click event listeners to all navigation items
+Object.values(navigationItems).forEach(section => {
+    section.navElement.addEventListener('click', () => handleSectionToggle(section));
+});
+
+
+const otherName = document.querySelector('.otherName');
+
+otherName.addEventListener('click', function() {
+    otherName.classList.add('hidden')
+    if (otherName.classList.contains('korean')){
+        setTimeout(() => {
+            otherName.textContent = '(백리안)'
+            otherName.classList.remove('korean')
+            otherName.classList.remove('hidden')
+        }, 500)
+    } else {
+        setTimeout(() => {
+            otherName.textContent = '(マウラナ・シャー・ブリリアン)'
+            otherName.classList.add('korean')
+            otherName.classList.remove('hidden')
+        }, 500)
+    }
+
+})

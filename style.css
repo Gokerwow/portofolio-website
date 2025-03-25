@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -34,6 +35,7 @@ body {
 
 .navbar li {
     list-style-type: none;
+    cursor: pointer;
 }
 
 .navbar a {
@@ -49,14 +51,14 @@ body {
     background: linear-gradient(180deg,#041b49,#04121f);
     height: 100vh;
     width: 100%;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
     padding-bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    gap: 10rem;
+    /* gap: 10rem; */
     z-index: -1;
     overflow: hidden;
 }
@@ -79,6 +81,14 @@ body {
     /* background-color: #006ec3; */
     position: relative; /* Tambahkan ini */
     z-index: 3; /* Atur z-index lebih tinggi dari audioVisualizer */
+    width: 100%;
+    height: 100%;
+}
+
+.hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .hero-left h1 {
@@ -131,8 +141,8 @@ body {
     display: flex;
     position: relative;
     white-space: nowrap;
-
 }
+
 
 .masking-box::before {
     content: '';
@@ -194,7 +204,10 @@ body {
 .hero-right {
     position: relative;
     width: 40%;
+    display: flex;
+    justify-content: center;
     /* margin-left: 16rem; */
+
 }
 
 .hero-photo {
@@ -203,6 +216,7 @@ body {
     justify-content: center;
     align-items: center;
     transform: scale(1.2);
+    /* margin-left: 1rem; */
     /* background-color: aqua; */
 }
 
@@ -514,6 +528,7 @@ body {
 .sideMenu {
     /* background-color: white; */
     position: fixed;
+    z-index: 99;
     top: 40%;
     left: 0;
     display: flex;
@@ -580,12 +595,90 @@ button {
 
 .myself {
     display: grid;
-    grid-template-columns: 40% 40% 20%;
+    grid-template-columns: 45% 30% 25%;
     color: white;
     width: 100%;
     height: 100vh;
     overflow: hidden;
     background: linear-gradient(180deg, #04121f, #060370);
+}
+
+.text-container {
+    /* background-color: gray; */
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.about-container {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.status-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    padding-left: 10rem;
+    gap: 40px;
+    visibility: hidden;
+}
+
+.status-item {
+    display: flex;
+    gap: 10px;
+}
+
+.status-item svg {
+    width: 50px;
+}
+
+.status-item h1 {
+    transition: all 300ms ease;
+}
+
+.status-item h1::after {
+    display: block;
+    content: '';
+    width: 100px;
+    height: 2px;
+    background-color: white;
+    /* justify-self: center; */
+    transition: all 300ms ease;
+}
+
+.status-item h1:hover::after{
+    width: 100%;
+}
+
+.status-item h1:hover {
+    transform: scale(1.1) translateX(10%);
+}
+
+.status-container h1{
+    font-size: 40px;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
 .right-text {
@@ -594,8 +687,9 @@ button {
     flex-direction: column;
     /* align-items: center; */
     justify-content: center;
-    padding: 8rem;
-    padding-right: 1rem;
+    padding: 10rem;
+    padding-right: 5rem;
+    height: 100%;
 }
 
 .old {
@@ -619,28 +713,32 @@ button {
 }
 
 .nameMain {
-    line-height: 2.5rem;
+    line-height: 3rem;
     margin-bottom: 1rem;
 }
 .right-text h3 {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 100;
     font-family: "Poiret One", sans-serif;
 }
 
 .right-text h2 {
+    font-size: 35px;
     font-family: "Noto Sans", sans-serif;
     font-weight: 400;
 }
 
 .right-text .otherName{
     margin-bottom: 1rem;
+    transition: all 500ms ease ;
+    cursor: pointer;
 }
+
 
 .right-text p {
     font-family: "Newsreader", serif;
     line-height: 25px;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .img-wrapper {
@@ -649,11 +747,22 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .img-wrapper img {
     position: absolute;
     width: 1200px;
+
+    transition: all 800ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform;
+}
+
+.img-wrapper .img-transform {
+    transform: translate(40px, 0px) scale(1.5);
+}
+
+.img-wrapper .img-default {
     transform: translateY(-13%);
 }
 
@@ -681,8 +790,9 @@ button {
     align-items: center;
     justify-content: end;
     gap: 10px;
-    width: 250px;
+    width: 350px;
     cursor: pointer;
+    transition: all 500ms ease;
 }
 
 .about-wrapper ul li::before{
@@ -692,8 +802,129 @@ button {
     height: 15px;
     background-color: white;
     border-radius: 50%;
+    box-shadow: 0 0 5px 2px white;
 }
 
 .about-wrapper ul li.active::before {
     display: block; /* Akan muncul setelah diklik */
+}
+
+.about-wrapper ul li.active {
+    font-size: 40px;
+    text-shadow: 0 0 10px white;
+}
+
+.skills-container {
+    /* background-color: green; */
+    /* position: absolute; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    padding-left: 10rem;
+    /* visibility: hidden; */
+}
+
+.skills-container .skills-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    /* background-color: green; */
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 30px;
+
+}
+
+.skill-item h1 {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+}
+
+.progress-bar {
+    display: flex;
+    position: relative;
+    /* background-color: #004dff; */
+    width: 500px;
+}
+
+.bar {
+    position: absolute;
+    width: 500px;
+    height: 20px;
+    z-index: 0;
+    background-color: white;
+    /* visibility: hidden; */
+    box-shadow: 0 0 10px 10px rgb(27, 46, 133);
+}
+
+@keyframes progressingWeb {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 75%;
+    }
+}
+
+@keyframes progressingMob {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 10%;
+
+    }
+}
+
+@keyframes progressingVid {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 80%;
+    }
+}
+
+@keyframes progressing3D {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 5%;
+    }
+}
+
+
+.progressBar {
+    position: absolute;
+    height: 20px;
+    z-index: 2;
+    background: linear-gradient(199deg,#307cbf,#1f4c73,#071c31);
+    background-size: 180% 180%;
+    animation: gradient-animation 3s ease infinite;
+    transition: all 500ms ease;
+    box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.514);
+}
+
+.web {
+    width: 75%;
+}
+
+.mob {
+    width: 10%;
+}
+
+.video {
+    width: 80%;
+}
+
+.render {
+    width: 5%;
 }
