@@ -9,17 +9,27 @@ const controls = document.querySelector('.controls')
 const Pause = document.querySelector('.Pause')
 const btnBefore = document.querySelector('.btnBefore');
 const btnForward = document.querySelector('.btnForward');
+const playIcon = document.querySelector('.play-icon')
+const pauseIcon = document.querySelector('.pause-icon')
 
-let degree;
+function showPlayIcon() { // untuk menampilkan ikon play
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
+}
 
-controls.addEventListener('click', function(){
+function showPauseIcon() { // untuk menampilkan ikon pause
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+}
+
+playIcon.addEventListener('click', function(){
     if (songList.length <= 0) {
         audioVisualizer();
         discMain.classList.add('turn');
+
         console.log("Audio diputar.");
     } else {
         controls.classList.toggle('Pause');
-
         if (controls.classList.contains("Pause")) {
             audio1.pause();
             discMain.classList.remove('turn');
@@ -28,11 +38,32 @@ controls.addEventListener('click', function(){
             audio1.play();
             discMain.classList.add('turn');
             console.log("Audio diputar.");
-            
         }
     }
-
     console.log(controls)
+    showPauseIcon()
+})
+
+pauseIcon.addEventListener('click', function(){
+    if (songList.length <= 0) {
+        audioVisualizer();
+        discMain.classList.add('turn');
+
+        console.log("Audio diputar.");
+    } else {
+        controls.classList.toggle('Pause');
+        if (controls.classList.contains("Pause")) {
+            audio1.pause();
+            discMain.classList.remove('turn');
+            console.log("Audio dijeda.");
+        } else {
+            audio1.play();
+            discMain.classList.add('turn');
+            console.log("Audio diputar.");
+        }
+    }
+    console.log(controls)
+    showPlayIcon()
 })
 
 btnForward.addEventListener('click', () => {
@@ -52,7 +83,6 @@ btnBefore.addEventListener('click', () => {
     console.log(songIndex)
     console.log("Daftar lagu yang sudah diputar:", songList);
 })
-
 
 const header = document.getElementById('header');
 const audioName = document.getElementById('audioName')
@@ -192,3 +222,5 @@ function shuffleArray(array) {
     }
     return array;
 }
+
+const liItem = document.querySelectorAll('.li-item')

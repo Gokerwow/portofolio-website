@@ -46,9 +46,7 @@ body {
 .hero-section {
     position: relative;
     /* background-color: blue; */
-    background: linear-gradient(180deg,#041b49,#020f27);
-    background-size: 120% 120%;
-    animation: gradient-animation 6s ease infinite;
+    background: linear-gradient(180deg,#041b49,#04121f);
     height: 100vh;
     width: 100%;
     padding-left: 5rem;
@@ -494,6 +492,10 @@ body {
     transform: scale(1.5);
 }
 
+.pause-icon {
+    display: none;
+}
+
 .fwLeft {
     rotate: 180deg;
 }
@@ -511,7 +513,7 @@ body {
 
 .sideMenu {
     /* background-color: white; */
-    position: absolute;
+    position: fixed;
     top: 40%;
     left: 0;
     display: flex;
@@ -573,3 +575,125 @@ button {
     rotate: 270deg;
     transition: 0.5s ease;
   }
+
+  /* myself */
+
+.myself {
+    display: grid;
+    grid-template-columns: 40% 40% 20%;
+    color: white;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(180deg, #04121f, #060370);
+}
+
+.right-text {
+    /* background-color: #004dff; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    padding: 8rem;
+    padding-right: 1rem;
+}
+
+.old {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.old h1:first-child {
+    font-family: "Permanent Marker", cursive;
+    color: #ffd700 ;
+    text-shadow: 0 0 10px #ffd700;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.old h1:last-child{
+    font-family: "Metal Mania", system-ui;
+    font-size: 30px;
+}
+
+.nameMain {
+    line-height: 2.5rem;
+    margin-bottom: 1rem;
+}
+.right-text h3 {
+    font-size: 20px;
+    font-weight: 100;
+    font-family: "Poiret One", sans-serif;
+}
+
+.right-text h2 {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+}
+
+.right-text .otherName{
+    margin-bottom: 1rem;
+}
+
+.right-text p {
+    font-family: "Newsreader", serif;
+    line-height: 25px;
+    font-size: 15px;
+}
+
+.img-wrapper {
+    position: relative;
+    /* background-color: #0685BB; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-wrapper img {
+    position: absolute;
+    width: 1200px;
+    transform: translateY(-13%);
+}
+
+.about-wrapper {
+    /* background-color: blueviolet; */
+    height: 100%;
+}
+
+.about-wrapper ul {
+    padding-right: 5rem;
+    font-family: "Noto Sans", sans-serif;
+    height: 100%;
+    font-size: 30px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.about-wrapper ul li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    width: 250px;
+    cursor: pointer;
+}
+
+.about-wrapper ul li::before{
+    content: '';
+    display: none;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.about-wrapper ul li.active::before {
+    display: block; /* Akan muncul setelah diklik */
+}
