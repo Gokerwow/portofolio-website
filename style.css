@@ -1000,6 +1000,7 @@ button {
     transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
     cursor: pointer;
     box-shadow: 0 0 10px 10px rgba(26, 90, 185, 0.377);
+    padding-top: 10px;
 }
 
 
