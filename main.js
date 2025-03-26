@@ -223,6 +223,29 @@ function shuffleArray(array) {
     return array;
 }
 
+const skillNavbar = document.querySelector('.skill-navbar');
+
+skillNavbar.addEventListener('click', function() {
+    // Directly call handleSectionToggle for skills
+    handleSectionToggle(navigationItems.skill);
+
+    // Remove active class from all navigation items
+    Object.values(navigationItems).forEach(nav => {
+        nav.navElement.classList.remove('active');
+    });
+
+    // Add active class to skill navigation item
+    navigationItems.skill.navElement.classList.add('active');
+
+    // Trigger skill animations
+    web.style.animation = 'progressingWeb 1s ease forwards';
+    mob.style.animation = 'progressingMob 1s ease forwards';
+    video.style.animation = 'progressingVid 1s ease forwards';
+    render.style.animation = 'progressing3D 1s ease forwards';
+});
+
+
+
 const items = document.querySelectorAll('.li-item'); // Ambil semua elemen <li>
 
 items.forEach(item => {
@@ -251,7 +274,7 @@ const navigationItems = {
     },
     tools: {
         navElement: document.querySelector('.tools'),
-        container: document.querySelector('.skills-container')
+        container: document.querySelector('.tools-container')
     }
 };
 
@@ -259,6 +282,12 @@ const web = document.querySelector('.web');
 const mob = document.querySelector('.mob');
 const video = document.querySelector('.video');
 const render = document.querySelector('.render');
+
+const webTools = document.querySelector('.web-tools');
+const mobTools = document.querySelector('.mob-tools');
+const vidTools = document.querySelector('.vid-tools');
+const renderTools = document.querySelector('.render-tools');
+
 
 const imgAbout = document.getElementById('img-about');
 const img = document.getElementById('img-about');
@@ -282,10 +311,18 @@ function resetSkillAnimations() {
     render.style.animation = '';
 }
 
+function resetToolsAnimations() {
+    webTools.style.animation = '';
+    mobTools.style.animation = '';
+    vidTools.style.animation = '';
+    renderTools.style.animation = '';
+}
+
 // Function to handle section toggle
 function handleSectionToggle(section) {
     // Reset any previous skill animations
     resetSkillAnimations();
+    resetToolsAnimations();
 
     // Hide all containers first
     hideAllContainers();
@@ -310,7 +347,17 @@ function handleSectionToggle(section) {
         mob.style.animation = 'progressingMob 1s ease forwards';
         video.style.animation = 'progressingVid 1s ease forwards';
         render.style.animation = 'progressing3D 1s ease forwards';
-    } else {
+    } else if (section === navigationItems.tools) {
+        imgAbout.src = src2;
+        img.classList.remove('img-default');
+        img.classList.add('img-transform');
+
+        webTools.style.animation = 'toRight 1s cubic-bezier(0.34, 1.56, 0.64, 1) 1';
+        mobTools.style.animation = 'toRight 1s cubic-bezier(0.34, 1.56, 0.64, 1) 200ms 1 forwards';
+        vidTools.style.animation = 'toRight 1s cubic-bezier(0.34, 1.56, 0.64, 1) 1';
+        renderTools.style.animation = 'toRight 1s cubic-bezier(0.34, 1.56, 0.64, 1) 200ms 1 forwards';
+    }
+     else {
         imgAbout.src = src2;
         img.classList.remove('img-default');
         img.classList.add('img-transform');
@@ -340,5 +387,4 @@ otherName.addEventListener('click', function() {
             otherName.classList.remove('hidden')
         }, 500)
     }
-
 })
