@@ -223,26 +223,29 @@ function shuffleArray(array) {
     return array;
 }
 
-const skillNavbar = document.querySelector('.skill-navbar');
+const skillNavbar = document.querySelectorAll('.skill-navbar');
 
-skillNavbar.addEventListener('click', function() {
-    // Directly call handleSectionToggle for skills
-    handleSectionToggle(navigationItems.skill);
-
-    // Remove active class from all navigation items
-    Object.values(navigationItems).forEach(nav => {
-        nav.navElement.classList.remove('active');
+skillNavbar.forEach(skill => {
+    skill.addEventListener('click', function() {
+        // Directly call handleSectionToggle for skills
+        handleSectionToggle(navigationItems.skill);
+    
+        // Remove active class from all navigation items
+        Object.values(navigationItems).forEach(nav => {
+            nav.navElement.classList.remove('active');
+        });
+    
+        // Add active class to skill navigation item
+        navigationItems.skill.navElement.classList.add('active');
+    
+        // Trigger skill animations
+        web.style.animation = 'progressingWeb 1s ease forwards';
+        mob.style.animation = 'progressingMob 1s ease forwards';
+        video.style.animation = 'progressingVid 1s ease forwards';
+        render.style.animation = 'progressing3D 1s ease forwards';
     });
+})
 
-    // Add active class to skill navigation item
-    navigationItems.skill.navElement.classList.add('active');
-
-    // Trigger skill animations
-    web.style.animation = 'progressingWeb 1s ease forwards';
-    mob.style.animation = 'progressingMob 1s ease forwards';
-    video.style.animation = 'progressingVid 1s ease forwards';
-    render.style.animation = 'progressing3D 1s ease forwards';
-});
 
 
 
@@ -369,6 +372,36 @@ Object.values(navigationItems).forEach(section => {
     section.navElement.addEventListener('click', () => handleSectionToggle(section));
 });
 
+const navigationWorkItems = {
+    web: {
+        navElement: document.querySelector('.web-workNav'),
+        container: document.querySelector('.web-work')
+    },
+    mobile: {
+        navElement: document.querySelector('.mob-workNav'),
+        container: document.querySelector('.mob-work')
+    },
+    video: {
+        navElement: document.querySelector('.vid-workNav'),
+        container: document.querySelector('.vid-work')
+    },
+};
+
+function HideAllWorksContainers() {
+    Object.values(navigationWorkItems).forEach(item => {
+        item.container.classList.remove('visible')
+        item.container.classList.add('hidden')
+    })}
+
+function handleWorkSectionToggle(section) {
+    HideAllWorksContainers()
+    section.container.classList.add('visible')
+    section.container.classList.remove('hidden')
+}
+
+Object.values(navigationWorkItems).forEach(section => {
+    section.navElement.addEventListener('click', () => handleWorkSectionToggle(section));
+});
 
 const otherName = document.querySelector('.otherName');
 
@@ -388,3 +421,40 @@ otherName.addEventListener('click', function() {
         }, 500)
     }
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+    const navWorkBG = document.querySelector('.nav-workBG');
+    const navItems = document.querySelectorAll('.nav-work li');
+    const navContainer = document.querySelector('.nav-work');
+
+    if (!navWorkBG || !navItems.length || !navContainer) {
+        console.error('Required elements not found');
+        return;
+    }
+
+    navItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            // Remove active class from all items
+            navItems.forEach(el => el.classList.remove('active'));
+            
+            // Add active class to clicked item
+            item.classList.add('active');
+
+            // Get the item's width and position
+            const itemWidth = item.offsetWidth;
+            const bgWidth = navContainer.offsetWidth * 0.2; // 20% of container width
+
+            // Calculate centered position
+            const centerOffset = (itemWidth - bgWidth) / 2;
+            const leftPosition = item.offsetLeft + centerOffset;
+            
+            // Set the background position
+            navWorkBG.style.left = `${leftPosition}px`;
+        });
+    });
+
+    // Activate first item by default
+    if (navItems.length > 0) {
+        navItems[0].click();
+    }
+});
