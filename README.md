@@ -8,6 +8,7 @@ Situs web portofolio pribadi yang menampilkan tentang saya, skill, edukasi dan p
 - Skill
 - Edukasi
 - Proyek
+- Pemutaran Lagu
 
 ## 🛠 Bahasa yang Digunakan
 - HTML5
