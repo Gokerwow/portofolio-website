@@ -137,6 +137,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 500;
+    color: black;
 }
 
 .navbar a:visited {
